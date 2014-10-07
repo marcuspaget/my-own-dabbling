@@ -1,0 +1,39 @@
+#
+#
+# Author: Mark Paget
+#
+# Github: https://github.com/marcuspaget/my-own-dabbling
+#
+#
+
+## read a csv file into a table called x - the first row contains column names */
+
+x<-read.table("2014-tax.csv",sep=",",header=T)
+
+## In my instance column names are Item,Amount,Cat,Month,Who 
+
+## split out by Who
+
+bob<-x[x$Who == "bob",]
+jane<-x[x$Who == "jane",]
+
+## Spin around each row (obs) and sum the Amount
+print(tapply(bob$Amount,bob$Cat,sum))
+
+## Typical output for bob
+
+#
+#     books  equipment   licences stationery   supplies  telephone
+#    303.00     694.27     132.00     345.50      96.00      30.00
+#
+
+# Then for jane
+
+print(tapply(jane$Amount,jane$Cat,sum))
+
+#
+#
+#     books  equipment   licences stationery   supplies  telephone
+#     163.0      583.0      348.0      678.4    11543.0         NA
+#
+#
